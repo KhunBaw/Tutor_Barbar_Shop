@@ -4,6 +4,8 @@ const mysql = require('mysql') // เรียกใช้งาน MySQL module
 const db = mysql.createConnection({
     //ip ของ sql
     host     : process.env.DB_HOST,
+    // port ของ sql
+    port : process.env.DB_PORT,
     //username ของ sql
     user     : process.env.DB_USER,
     //password ของ sql
