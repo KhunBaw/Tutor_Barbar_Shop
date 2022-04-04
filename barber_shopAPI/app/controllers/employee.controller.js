@@ -3,11 +3,11 @@ const mysql = require("../models/mysql.models");
 
 exports.create = (req, res) => {
   //Get request
-  const { username, password,fname,lname } = req.body
+  const { username, password, fname, lname } = req.body;
   // Validate request
-  if(validate_req(req,res,[username,password,fname])) return;
+  if (validate_req(req, res, [username, password, fname])) return;
 
-  let sql = "INSERT INTO employee SET ?";
+  let sql = `INSERT INTO employee SET ?`;
   let data = {
     username: username,
     password: password,
@@ -19,13 +19,12 @@ exports.create = (req, res) => {
       res.status(500).send({
         message: err.message || "Some error occurred.",
       });
-    else res.status(200).json(data);
+    else res.status(201).json(data);
   });
-
 };
 
 exports.findAll = (req, res) => {
-  let sql = "SELECT * FROM employee";
+  let sql = `SELECT * FROM employee`;
 
   mysql.get(sql, (err, data) => {
     if (err)
@@ -37,20 +36,54 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  return res.send({ message: "findOne" });
+  //Get params
+  const { id } = req.params;
+  // Validate request
+  if (validate_req(req, res, [id])) return;
+
+  let sql = `SELECT * FROM employee WHERE emp_id = ${id}`;
+
+  mysql.get(sql, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred.",
+      });
+    else res.status(200).json(data[0]);
+  });
 };
 
 exports.update = (req, res) => {
+  //Get request
+  const { fname, lname } = req.body;
+  //Get params
+  const { id } = req.params;
   // Validate request
-  validate_req(req);
+  if (validate_req(req, res, [fname,id])) return;
 
-  return res.send({ message: "update" });
+  let sql = `UPDATE employee SET emp_fname = ?,emp_lname  = ? WHERE emp_id = ?`;
+  let data = [fname, lname,id];
+  mysql.update(sql, data, (err, data) => {
+    if (err)
+    res.status(err.status).send({
+      message: err.message || "Some error occurred.",
+    });
+    else res.status(204).end();
+  });
 };
 
 exports.delete = (req, res) => {
-  return res.send({ message: "delete" });
-};
+  //Get params
+  const { id } = req.params;
+  // Validate request
+  if (validate_req(req, res, [id])) return;
 
-exports.deleteAll = (req, res) => {
-  return res.send({ message: "deleteAll" });
+  let sql = `DELETE FROM employee WHERE emp_id = ?`;
+  let data = [id];
+  mysql.delete(sql, data, (err, data) => {
+    if (err)
+      res.status(err.status).send({
+        message: err.message || "Some error occurred.",
+      });
+    else res.status(204).end();
+  });
 };
