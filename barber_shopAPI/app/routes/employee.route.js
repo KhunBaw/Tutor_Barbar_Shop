@@ -1,6 +1,5 @@
 module.exports = app => {
   const testCon = require("../controllers/employee.controller");
-  const prefix = process.env.PREFIX;
   const router = require("express").Router();
 
   router.post("/", testCon.create);
@@ -12,6 +11,7 @@ module.exports = app => {
   router.put("/:id", testCon.update);
 
   router.delete("/:id", testCon.delete);
-
-  app.use(prefix+"/employee", router);
+  
+  //เซ็ต PREFIX
+  app.use(process.env.PREFIX+"/employee", router);
 };

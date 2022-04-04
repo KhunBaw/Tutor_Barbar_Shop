@@ -2,9 +2,13 @@ const mysql = require('mysql') // เรียกใช้งาน MySQL module
  
 // กำหนดการเชื่อมต่อฐานข้อมูล
 const db = mysql.createConnection({
+    //ip ของ sql
     host     : process.env.DB_HOST,
+    //username ของ sql
     user     : process.env.DB_USER,
+    //password ของ sql
     password : process.env.DB_PASSWORD,
+    //ชื่อ data ของ sql
     database : process.env.DB_DATABASE
   })
  

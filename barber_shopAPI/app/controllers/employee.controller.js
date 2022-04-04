@@ -31,7 +31,7 @@ exports.findAll = (req, res) => {
   //ดึงข้อมูล โดยส่งคำสั่ง SQL เข้าไป
   mysql.get(sql, (err, data) => {
     if (err)
-      res.status(500).send({
+      res.status(err.status).send({
         message: err.message || "Some error occurred.",
       });
     else if (data) res.status(200).json(data);
@@ -49,7 +49,7 @@ exports.findOne = (req, res) => {
   //ดึงข้อมูล โดยส่งคำสั่ง SQL เข้าไป
   mysql.get(sql, (err, data) => {
     if (err)
-      res.status(500).send({
+      res.status(err.status).send({
         message: err.message || "Some error occurred.",
       });
     else if (data[0]) res.status(200).json(data[0]);
