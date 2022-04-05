@@ -1,16 +1,17 @@
 module.exports = (app) => {
-  const testCon = require('../controllers/employee.controller')
   const router = require('express').Router()
+  // const { verify } = require('../models/middleware.models.js')
+  const { create,findAll,findOne,update,deleteOne } = require('../controllers/employee.controller')
 
-  router.post('/', testCon.create)
+  router.post('/', create)
 
-  router.get('/', testCon.findAll)
+  router.get('/',findAll)
 
-  router.get('/:id', testCon.findOne)
+  router.get('/:id', findOne)
 
-  router.put('/:id', testCon.update)
+  router.put('/:id', update)
 
-  router.delete('/:id', testCon.delete)
+  router.delete('/:id', deleteOne)
 
   //เซ็ต PREFIX
   app.use(process.env.PREFIX + '/employee', router)

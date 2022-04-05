@@ -1,7 +1,7 @@
 const validate_req = require('../models/validate_req.models')
 const mysql = require('../models/mysql.models')
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   //ดึงข้อมูลจาก request
   const { username, password, fname, lname } = req.body
   //ตรวจสอบความถูกต้อง request
@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     emp_lname: lname,
   }
   //เพิ่มข้อมูล โดยส่งคำสั่ง SQL เข้าไป
-  mysql.create(sql, data, (err, data) => {
+  await mysql.create(sql, data, (err, data) => {
     if ((err.errno = 1062)) {
       return res.status(400).json({
         message: 'Username already have',
@@ -31,11 +31,11 @@ exports.create = (req, res) => {
   })
 }
 
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
   //คำสั่ง SQL
   let sql = `SELECT * FROM employee`
   //ดึงข้อมูล โดยส่งคำสั่ง SQL เข้าไป
-  mysql.get(sql, (err, data) => {
+  await mysql.get(sql, (err, data) => {
     if (err)
       res.status(err.status).send({
         message: err.message || 'Some error occurred.',
@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
   })
 }
 
-exports.findOne = (req, res) => {
+exports.findOne = async (req, res) => {
   //ดึงข้อมูลจาก params
   const { id } = req.params
   // ตรวจสอบความถูกต้อง request
@@ -53,7 +53,7 @@ exports.findOne = (req, res) => {
   //คำสั่ง SQL
   let sql = `SELECT * FROM employee WHERE emp_id = ${id}`
   //ดึงข้อมูล โดยส่งคำสั่ง SQL เข้าไป
-  mysql.get(sql, (err, data) => {
+ await mysql.get(sql, (err, data) => {
     if (err)
       res.status(err.status).send({
         message: err.message || 'Some error occurred.',
@@ -63,7 +63,7 @@ exports.findOne = (req, res) => {
   })
 }
 
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   //ดึงข้อมูลจาก request
   const { fname, lname } = req.body
   //ดึงข้อมูลจาก params
@@ -75,7 +75,7 @@ exports.update = (req, res) => {
   //ข้อมูลที่จะแก้ไขโดยเรียงตามลำดับ เครื่องหมาย ?
   let data = [fname, lname, id]
   //แก้ไขข้อมูล โดยส่งคำสั่ง SQL เข้าไป
-  mysql.update(sql, data, (err, data) => {
+ await mysql.update(sql, data, (err, data) => {
     if (err)
       res.status(err.status).send({
         message: err.message || 'Some error occurred.',
@@ -84,7 +84,7 @@ exports.update = (req, res) => {
   })
 }
 
-exports.delete = (req, res) => {
+exports.deleteOne = async (req, res) => {
   //ดึงข้อมูลจาก params
   const { id } = req.params
   //ตรวจสอบความถูกต้อง request
@@ -94,7 +94,7 @@ exports.delete = (req, res) => {
   //ข้อมูลที่จะแก้ไขโดยเรียงตามลำดับ เครื่องหมาย ?
   let data = [id]
   //ลบข้อมูล โดยส่งคำสั่ง SQL และ id เข้าไป
-  mysql.delete(sql, data, (err, data) => {
+ await mysql.delete(sql, data, (err, data) => {
     if (err)
       res.status(err.status).send({
         message: err.message || 'Some error occurred.',

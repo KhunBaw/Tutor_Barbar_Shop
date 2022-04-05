@@ -1,10 +1,10 @@
-import { sign as _sign, verify as _verify } from 'jsonwebtoken'
+const jwt = require('jsonwebtoken');
 const secretkey = process.env.SECRETKEY
 const algorithm = 'RS256'
 
-async function sign(data, expires) {
+exports.sign = async(data, expires) => {
   try {
-    return _sign(data, secretkey, {
+    return await jwt.sign(data, secretkey, {
       algorithm: algorithm,
       expiresIn: expires || '3h',
     })
@@ -13,12 +13,12 @@ async function sign(data, expires) {
   }
 }
 
-async function verify(req, res, next) {
+exports.verify = async(req, res, next) => {
   let accessToken = getTokenFrom(req)
   if (!accessToken) return res.status(403).send('notToken')
 
   try {
-    _verify(
+    await jwt.verify(
       accessToken,
       secretkey,
       { algorithms: [algorithm] },
@@ -40,5 +40,3 @@ const getTokenFrom = (request) => {
   }
   return null
 }
-
-export default { sign, verify, getTokenFrom }

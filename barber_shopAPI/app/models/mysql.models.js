@@ -1,7 +1,7 @@
 const db = require('../config/db')
 
-exports.create = (query, newData, result) => {
-  db.query(query, newData, (error, results, fields) => {
+exports.create = async (query, newData, result) => {
+  await db.query(query, newData, (error, results, fields) => {
     // error คือ ข้อผิดพลาดของคำสั่ง sql นั้นๆ  if (error) throw error;
     // results เป็น array ของข้อมูลผลลัพธ์
     // fields เป็นรายละเอียดของฟิลด์ของตาราง tbl_users ปกติเราจะไม่ได้ใช้ค่านี้เท่าไหร่
@@ -16,8 +16,8 @@ exports.create = (query, newData, result) => {
   })
 }
 
-exports.get = (query, result) => {
-  db.query(query, (error, results, fields) => {
+exports.get = async (query, result) => {
+  await db.query(query, (error, results, fields) => {
     // error คือ ข้อผิดพลาดของคำสั่ง sql นั้นๆ  if (error) throw error;
     // results เป็น array ของข้อมูลผลลัพธ์
     // fields เป็นรายละเอียดของฟิลด์ของตาราง tbl_users ปกติเราจะไม่ได้ใช้ค่านี้เท่าไหร่
@@ -34,8 +34,8 @@ exports.get = (query, result) => {
   })
 }
 
-exports.update = (query, newData, result) => {
-  db.query(query, newData, (error, results, fields) => {
+exports.update = async (query, newData, result) => {
+  await db.query(query, newData, (error, results, fields) => {
     // error คือ ข้อผิดพลาดของคำสั่ง sql นั้นๆ  if (error) throw error;
     // results เป็น array ของข้อมูลผลลัพธ์
     // fields เป็นรายละเอียดของฟิลด์ของตาราง tbl_users ปกติเราจะไม่ได้ใช้ค่านี้เท่าไหร่
@@ -59,8 +59,8 @@ exports.update = (query, newData, result) => {
   })
 }
 
-exports.delete = (query, newData, result) => {
-  db.query(query, newData, (error, results, fields) => {
+exports.delete = async (query, newData, result) => {
+  await db.query(query, newData, (error, results, fields) => {
     // error คือ ข้อผิดพลาดของคำสั่ง sql นั้นๆ  if (error) throw error;
     // results เป็น array ของข้อมูลผลลัพธ์
     // fields เป็นรายละเอียดของฟิลด์ของตาราง tbl_users ปกติเราจะไม่ได้ใช้ค่านี้เท่าไหร่
