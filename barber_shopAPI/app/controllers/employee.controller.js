@@ -1,4 +1,4 @@
-const validate_req = require('../models/validate_request')
+const validate_req = require('../models/validate_req.models')
 const mysql = require('../models/mysql.models')
 
 exports.create = (req, res) => {
