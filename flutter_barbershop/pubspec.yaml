@@ -1,0 +1,66 @@
+#ชื่อแอป
+name: barbershop
+#คำอธิบายแอป
+description: สำหรับสอนน้องปี3.
+
+# บรรทัดต่อไปนี้ป้องกันแพ็กเกจจากการถูกเผยแพร่โดยไม่ได้ตั้งใจไปยัง pub.dev
+publish_to: "none" # ลบบรรทัดนี้หากคุณต้องการเผยแพร่ไปที่ pub.dev
+
+#เวอร์ชั่นแอป
+version: 1.0.0+1
+
+#ยึด sdk ที่ใช้ 2.16.2
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+#แพ็คเกจจากเว็บ pub.dev (ใช้งานจริง)
+dependencies:
+  flutter:
+    sdk: flutter
+  #แพ็คเกจ
+  cupertino_icons: ^1.0.2
+
+#แพ็คเกจจากเว็บ pub.dev (สำหรับตอน dev)
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  #แพ็คเกจ
+  flutter_lints: ^1.0.4
+
+# ดู Doc ของการใช้ไฟล์นี้ได้ที่ : https://dart.dev/tools/pub/pubspec
+
+# ส่วนต่อไปนี้เป็นข้อมูลเฉพาะของ Flutter
+flutter:
+  # บรรทัดต่อไปนี้ช่วยให้แน่ใจว่า Material Icons มี อยู่ในแอปพลิเคชัน เพื่อให้คุณสามารถใช้ไอคอนในคลาส Material Icons ได้
+  uses-material-design: true
+
+  # หากต้องการเพิ่มไฟล์หรือรูปลงในแอปพลิเคชัน ให้เพิ่มส่วนเนื้อหาดังนี้
+  assets:
+    - assets/images/
+    # - images/a_dot_ham.jpeg
+
+  #ข้อมูลเพิ่มเติม
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  #ข้อมูลเพิ่มเติม
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # หากต้องการเพิ่มแบบอักษรที่กำหนดเองลงในแอปพลิเคชันของคุณ ให้เพิ่มส่วนแบบอักษรที่นี่
+  # ตัวอย่าง
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  #ข้อมูลเพิ่มเติม
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
