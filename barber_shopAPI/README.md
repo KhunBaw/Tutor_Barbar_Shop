@@ -1,6 +1,6 @@
 # API by Node.js
+file .env
 ```
-#file .env
 DB_HOST=
 DB_PORT=
 DB_USER=
