@@ -1,0 +1,11 @@
+#file .env
+``
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=
+PREFIX=/api/v1
+PORT=3000
+SECRETKEY=
+``
