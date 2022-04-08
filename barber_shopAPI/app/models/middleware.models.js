@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
+const { sign, verify } = require ('jsonwebtoken');
 const secretkey = process.env.SECRETKEY
-const algorithm = 'RS256'
+const algorithm = 'HS384'
 
-exports.sign = async(data, expires) => {
+exports.signtoken = async(data, expires) => {
   try {
-    return await jwt.sign(data, secretkey, {
+    return await sign(data, secretkey, {
       algorithm: algorithm,
       expiresIn: expires || '3h',
     })
@@ -13,12 +13,12 @@ exports.sign = async(data, expires) => {
   }
 }
 
-exports.verify = async(req, res, next) => {
+exports.verifytoken = async(req, res, next) => {
   let accessToken = getTokenFrom(req)
   if (!accessToken) return res.status(403).send('notToken')
 
   try {
-    await jwt.verify(
+    await verify(
       accessToken,
       secretkey,
       { algorithms: [algorithm] },

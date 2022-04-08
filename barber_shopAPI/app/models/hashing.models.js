@@ -1,13 +1,12 @@
-import { genSaltSync, hashSync, compareSync } from 'bcrypt';
+const { genSaltSync, hashSync, compareSync } = require('bcrypt')
 
 function hashPassword(password) {
   const salt = genSaltSync(10)
   return hashSync(password, salt)
 }
 
-function verifyingHash(password,passwordDB) {
-    const hash = hashPassword(password);
-    return compareSync(passwordDB, hash);
+function verifyingHash(password, passwordDB) {
+  return compareSync(password, passwordDB)
 }
 
-export default { hashPassword, verifyingHash }
+module.exports = { hashPassword, verifyingHash }
