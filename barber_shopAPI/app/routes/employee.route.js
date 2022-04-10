@@ -1,13 +1,17 @@
 module.exports = (app) => {
   const router = require('express').Router()
-  // const { verifytoken } = require('../models/middleware.models.js')
-  const { create,findAll,findOne,update,deleteOne } = require('../controllers/employee.controller')
+  const { verifytoken } = require('../models/middleware.models.js')
+  const { create,findAll,findOne,update,deleteOne,login,number } = require('../controllers/employee.controller')
 
   router.post('/', create)
 
-  router.get('/',findAll)
+  router.get('/',verifytoken,findAll)
 
-  router.get('/:id', findOne)
+  router.post('/login',login)
+
+  router.get('/getone',verifytoken, findOne)
+
+  router.post('/number',number)
 
   router.put('/:id', update)
 

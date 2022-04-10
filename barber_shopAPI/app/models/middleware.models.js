@@ -23,6 +23,7 @@ exports.verifytoken = async(req, res, next) => {
       secretkey,
       { algorithms: [algorithm] },
       (err, authData) => {
+        console.log(authData);
         if (err) return res.status(401).send('Token หมดอายุ')
         req.authData = authData
         next()
