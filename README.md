@@ -14,7 +14,7 @@ package
 - dotenv : 16.0.0
 - express : 4.17.3
 - jsonwebtoken : 8.5.1
-- mysql : 2.18.1
+- mysql : 2.18.1 หรือจะเปลียนไปใช้ mysql2 ก็ได้
 
 package dev
 - eslint : 8.12.0
