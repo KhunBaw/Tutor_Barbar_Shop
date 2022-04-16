@@ -1,15 +1,17 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Login> createState() => _LoginState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LoginState extends State<Login> {
   bool hidePassword = true;
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Column(
                       children: [
                         TextFormField(
+                          controller: username,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -78,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: password,
                           obscureText: hidePassword,
                           style: TextStyle(
                             color: Colors.white,
@@ -127,8 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ElevatedButton(
                           onPressed: () {
                             print('เข้าสู่ระบบ');
-                            Navigator.pushNamedAndRemoveUntil(context, "/page1",
-                                (Route<dynamic> route) => false);
+                            Navigator.pushReplacementNamed(context, "/page1");
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
@@ -156,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ElevatedButton(
                           onPressed: () {
                             print('สมัครสมาชิก');
+                            Navigator.pushNamed(context, "/register");
                           },
                           child: Text(
                             'สมัครสมาชิก',

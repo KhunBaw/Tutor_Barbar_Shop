@@ -29,10 +29,10 @@ class TextFormFieldModel extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-        labelStyle: TextStyle(color: Colors.white),
-        hintStyle: TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.black),
+        hintStyle: TextStyle(color: Colors.black),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 1),
+          borderSide: BorderSide(color: Colors.blue, width: 1.5),
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),

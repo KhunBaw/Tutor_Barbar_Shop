@@ -19,6 +19,7 @@ dependencies:
     sdk: flutter
   #แพ็คเกจ
   cupertino_icons: ^1.0.2
+  intl: ^0.17.0
 
 #แพ็คเกจจากเว็บ pub.dev (สำหรับตอน dev)
 dev_dependencies:
