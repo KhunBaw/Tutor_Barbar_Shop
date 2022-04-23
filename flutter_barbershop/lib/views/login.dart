@@ -1,5 +1,12 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../config/config.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,6 +19,22 @@ class _LoginState extends State<Login> {
   bool hidePassword = true;
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    chackToken();
+  }
+
+  chackToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    print(token);
+    if (token != null) {
+      headers?['Authorization'] = "bearer $token";
+      Navigator.pushReplacementNamed(context, "/page1");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +152,11 @@ class _LoginState extends State<Login> {
                         ),
                         SizedBox(height: 20),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             print('เข้าสู่ระบบ');
-                            Navigator.pushReplacementNamed(context, "/page1");
+                            await chackLogin(
+                                username.text, password.text, context);
+                            // Navigator.pushReplacementNamed(context, "/page2");
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
@@ -189,4 +214,27 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+Future chackLogin(String username, String password, context) async {
+  Uri url = Uri.parse('http://192.168.1.2:3000/api/v1/employee/login');
+  await http
+      .post(
+    url,
+    headers: headers,
+    body: jsonEncode(
+      {"username": username, "password": password},
+    ),
+  )
+      .then((req) async {
+    if (req.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      var data = jsonDecode(req.body);
+      prefs.setString('token', data['token']);
+      headers?['Authorization'] = "bearer ${data['token']}";
+      Navigator.pushReplacementNamed(context, "/page1");
+    } else {
+      print('error');
+    }
+  });
 }
