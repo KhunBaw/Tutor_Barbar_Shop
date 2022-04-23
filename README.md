@@ -10,7 +10,6 @@
 ## Back-end Node.js
 package
 - bcrypt : 5.0.1
-- body-parser : 1.20.0
 - dotenv : 16.0.0
 - express : 4.17.3
 - jsonwebtoken : 8.5.1
