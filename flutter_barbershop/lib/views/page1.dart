@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../components/sidemenu.dart';
 import '../config/config.dart';
 import 'page3.dart';
 
@@ -114,6 +115,7 @@ class _Page1State extends State<Page1> {
           ),
         ),
       ),
+      drawer: SideMenu(),
     );
   }
 }

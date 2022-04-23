@@ -5,8 +5,7 @@ module.exports = () => {
 
   dotenv.config()
   const app = express()
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(express.json())
 
   //หน้าแรกจะแสดงคำยอดฮิต
   app.get('/', (req, res) => {

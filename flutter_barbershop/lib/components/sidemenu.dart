@@ -89,6 +89,12 @@ class _SideMenuState extends State<SideMenu> {
                   'หน้าแรก',
                   '/page1',
                 ),
+                routeItem(
+                  context,
+                  Icon(Icons.house),
+                  'หน้าสอง',
+                  '/page2',
+                ),
               ],
             ),
           ),
